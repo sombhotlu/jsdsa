@@ -11,7 +11,7 @@ class SinglyLinkedList {
 
 	public push(val: unknown) {
 		let node = new LL_Node(val)
-		if (this.head === null) {
+		if (this.head === null || this.tail === null) {
 			this.head = node
 			this.tail = node
 		} else {
@@ -26,10 +26,10 @@ class SinglyLinkedList {
 		Traverse
 	*/
 
-	public traverse(val) {
+	public traverse(val: unknown) {
 		let currentNode = this.head
 		let prevNode = null
-		while (currentNode.val !== val) {
+		while (currentNode && currentNode.val !== val) {
 			prevNode = currentNode
 			currentNode = currentNode.next
 		}
@@ -39,22 +39,22 @@ class SinglyLinkedList {
 	/**
 	 * pop
 	 */
-	public pop(val) {
+	public pop(val: unknown) {
 		let currentNode = this.head
 		if (!currentNode) {
 			throw new Error('Linked List is empty')
 		}
 
 		let prevNode = null
-		while (val !== currentNode.val && currentNode !== this.tail) {
+		while (currentNode !== null && val !== currentNode.val && currentNode !== this.tail) {
 			prevNode = currentNode
 			currentNode = currentNode.next
 		}
-		if (currentNode.val !== val) {
+		if (currentNode && currentNode.val !== val) {
 			throw new Error('Value not found to be removed')
 		}
 
-		if (currentNode.val === val) {
+		if (currentNode && currentNode.val === val) {
 			if (this.head === this.tail) {
 				this.head = null
 				this.tail = null
