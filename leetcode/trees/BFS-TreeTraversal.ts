@@ -8,3 +8,5 @@ class Tree {
 	public root: TreeNode = null
 	constructor() {}
 }
+
+export {}
