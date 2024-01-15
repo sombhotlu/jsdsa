@@ -26,9 +26,11 @@ class MaxHeap {
 	}
 
 	extractMax() {
+		let rootVal = this.values[0]
 		this.values[0] = this.values[this.values.length - 1]
 		this.values.length = this.values.length - 1
 		this.sinkDown()
+		return rootVal
 	}
 
 	sinkDown() {
@@ -90,8 +92,11 @@ class MinHeap {
 	}
 
 	extractMin() {
+		let rootVal = this.values[0]
 		this.values[0] = this.values[this.values.length - 1]
+		this.values.length = this.values.length - 1
 		this.sinkDown()
+		return rootVal
 	}
 
 	sinkDown() {

@@ -60,12 +60,13 @@ class SinglyLinkedList {
 				this.tail = null
 			} else if (this.head === currentNode) {
 				this.head = this.head.next
-			} else if (this.tail === currentNode) {
-				prevNode.next = null
-				this.tail = prevNode
-			} else {
-				prevNode.next = currentNode.next
-			}
+			} else if (prevNode !== null)
+				if (this.tail === currentNode) {
+					prevNode.next = null
+					this.tail = prevNode
+				} else {
+					prevNode.next = currentNode.next
+				}
 			this.length--
 		}
 		return this
@@ -79,13 +80,13 @@ class SinglyLinkedList {
 
 		while (currentNode !== this.tail) {
 			prevNode = currentNode
-			currentNode = currentNode.next
+			currentNode = currentNode?.next ?? null
 		}
 
 		if (this.head === this.tail) {
 			this.head = null
 			this.tail = null
-		} else {
+		} else if (prevNode) {
 			prevNode.next = null
 			this.tail = prevNode
 		}
@@ -95,7 +96,7 @@ class SinglyLinkedList {
 	}
 
 	public shift() {
-		if (!this.length) throw new Error('No items to be removed')
+		if (!this.head) throw new Error('No items to be removed')
 		let removedNode = this.head
 		this.head = this.head.next
 		this.length--
@@ -122,15 +123,29 @@ class SinglyLinkedList {
 
 		return this
 	}
+
+	public createLoop(indexTo: number) {
+		let i = 0
+		let currentNode: typeof this.head = this.head
+		while (i < indexTo && currentNode) {
+			currentNode = currentNode.next
+			i++
+		}
+
+		if (!currentNode) return false
+		if (this.tail) this.tail.next = currentNode
+	}
 }
 
 const LL = new SinglyLinkedList()
-console.log(LL)
-console.log(LL.push('Hi'))
-console.log(LL.push('Hello'))
-console.log(LL.push('Hellosss'))
+// console.log(LL)
+// console.log(LL.push('Hi'))
+// console.log(LL.push('Hello'))
+// console.log(LL.push('Hellosss'))
 // console.log(LL.pop("Hi"));
 // console.log(LL.actualPop())
 // console.log(LL.shift())
-console.log(LL.reverse())
-console.log(LL)
+// console.log(LL.reverse())
+// console.log(LL)
+
+export {SinglyLinkedList}

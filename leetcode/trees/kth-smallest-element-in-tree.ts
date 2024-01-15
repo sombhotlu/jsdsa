@@ -9,12 +9,12 @@ class TreeNode {
 	}
 }
 
-function kthSmallest(root: TreeNode | null, k: number): number {
-	let nums = inorderTraversal(root, k)
-	console.log(nums)
+// function kthSmallest(root: TreeNode | null, k: number): number {
+// 	let nums = inorderTraversal(root, k)
+// 	console.log(nums)
 
-	return nums[k - 1]
-}
+// 	return nums[k - 1]
+// }
 
 function inorderTraversal(node: TreeNode | null, k: number): number[] {
 	let nums: number[] = [],
@@ -39,6 +39,28 @@ let root = new TreeNode(
 	new TreeNode(3, new TreeNode(2, new TreeNode(1), null), new TreeNode(4)),
 	new TreeNode(6, null, null),
 )
+
+function kthSmallest(root: TreeNode | null, k: number): number {
+	let i = 0,
+		value: number | null = null
+
+	function traverse(node: TreeNode | null) {
+		if (node?.left) traverse(node.left)
+		if (i < k - 1 && node) {
+			i++
+		} else if (i === k - 1 && node && value === null) {
+			console.log(i, node.val)
+			value = node.val
+			return
+		}
+
+		if (value !== null) return
+		if (node?.right) traverse(node.right)
+	}
+
+	traverse(root)
+	return value ?? 0
+}
 
 console.log(kthSmallest(root, 3))
 

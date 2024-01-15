@@ -9,38 +9,29 @@ class TreeNode {
 	}
 }
 
-function levelOrder(root: TreeNode | null): number[][] {
+function averageOfLevels(root: TreeNode | null): number[] {
 	if (!root) return []
 
 	let queue = [root]
 	let result = []
-	let nodesInALevel = queue.length,
-		levelNodes = [],
-		count = 0
 
 	while (queue.length) {
-		while (count < nodesInALevel) {
+		let nodesInALevel = queue.length,
+			count = 0,
+			sum = 0
+
+		for (let i = 0; i < nodesInALevel; i++) {
 			let node = queue.shift()
 			if (node) {
-				levelNodes.push(node.val)
+				sum += node.val
+				count++
 				if (node.left) queue.push(node.left)
 				if (node.right) queue.push(node.right)
 			}
-
-			count++
 		}
 
-		result.push(levelNodes)
-		levelNodes = []
-		count = 0
-		nodesInALevel = queue.length
+		result.push(Number((sum / count).toFixed(5)))
 	}
 
 	return result
 }
-
-let root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)))
-
-console.log(levelOrder(root))
-
-export {}

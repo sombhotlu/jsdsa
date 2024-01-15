@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Launch Program",
 			"skipFiles": ["<node_internals>/**"],
-			"program": "${workspaceFolder}/leetcode/trees/same-tree.ts",
+			"program": "${workspaceFolder}/leetcode/binary-search/poputlating-next-right-pointer-to-each-node-2.ts",
 			"runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
 			"outFiles": ["${workspaceFolder}/**/*.js"]
 		}

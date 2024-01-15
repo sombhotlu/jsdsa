@@ -9,16 +9,18 @@ class TreeNode {
 	}
 }
 
-function levelOrder(root: TreeNode | null): number[][] {
+function zigzagLevelOrder(root: TreeNode | null): number[][] {
 	if (!root) return []
 
 	let queue = [root]
 	let result = []
 	let nodesInALevel = queue.length,
 		levelNodes = [],
-		count = 0
+		count = 0,
+		zigzag = true
 
 	while (queue.length) {
+		zigzag = !zigzag
 		while (count < nodesInALevel) {
 			let node = queue.shift()
 			if (node) {
@@ -30,7 +32,7 @@ function levelOrder(root: TreeNode | null): number[][] {
 			count++
 		}
 
-		result.push(levelNodes)
+		result.push(zigzag ? levelNodes.reverse() : levelNodes)
 		levelNodes = []
 		count = 0
 		nodesInALevel = queue.length
@@ -41,6 +43,6 @@ function levelOrder(root: TreeNode | null): number[][] {
 
 let root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)))
 
-console.log(levelOrder(root))
+console.log(zigzagLevelOrder(root))
 
 export {}
