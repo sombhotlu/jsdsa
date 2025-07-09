@@ -33,8 +33,12 @@ const findChars = (str) => {
 		else obj[s]++
 	}
 
+	{ { obj } }
+	
 	return obj
 }
 
 console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']))
 console.log(groupAnagrams(['ac', 'c']))
+
+console.log("Hello")

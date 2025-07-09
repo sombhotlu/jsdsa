@@ -27,7 +27,7 @@
 
 */
 
-function insert(intervals: number[][], newInterval: number[]): number[][] {
+function insert(intervals: number[][], newInterval: number[]): number[][] | undefined {
 	// result will be the answer
 	let result = [],
 		// this is will be merging newInterval with intervals

@@ -41,7 +41,9 @@ class MaxHeap {
 
 		while (rootVal < firstDecendent || rootVal < secondDescendent) {
 			let indexToBeSwapped =
-				firstDecendent < secondDescendent ? 2 * rootIndex + 2 : 2 * rootIndex + 1
+				secondDescendent !== undefined && firstDecendent < secondDescendent
+					? 2 * rootIndex + 2
+					: 2 * rootIndex + 1
 			this.values[rootIndex] = this.values[indexToBeSwapped]
 			this.values[indexToBeSwapped] = rootVal
 
@@ -101,16 +103,14 @@ class MinHeap {
 
 	sinkDown() {
 		let rootIndex = 0
-		let rootVal = this.values[this.values.length - 1]
-		this.values[rootIndex] = rootVal
-		this.values.length = this.values.length - 1
 
-		while (
-			rootVal > this.values[2 * rootIndex + 1] ||
-			rootVal > this.values[2 * rootIndex + 2]
-		) {
+		let rootVal = this.values[rootIndex],
+			firstDecendent = this.values[2 * rootIndex + 1],
+			secondDescendent = this.values[2 * rootIndex + 2]
+
+		while (rootVal > firstDecendent || rootVal > secondDescendent) {
 			let indexToBeSwapped
-			if (this.values[2 * rootIndex + 1] < this.values[2 * rootIndex + 2]) {
+			if (!secondDescendent || firstDecendent < secondDescendent) {
 				indexToBeSwapped = 2 * rootIndex + 1
 			} else {
 				indexToBeSwapped = 2 * rootIndex + 2
@@ -120,6 +120,9 @@ class MinHeap {
 			this.values[indexToBeSwapped] = rootVal
 
 			rootIndex = indexToBeSwapped
+			rootVal = this.values[rootIndex]
+			firstDecendent = this.values[2 * rootIndex + 1]
+			secondDescendent = this.values[2 * rootIndex + 2]
 		}
 	}
 }
@@ -160,3 +163,5 @@ console.log(
 		20,
 	),
 )
+
+export {MinHeap, MaxHeap}
